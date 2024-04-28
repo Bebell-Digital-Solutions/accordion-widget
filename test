@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style id="dynamicStyle">
+        /* Default styles will go here. */
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Accordion Generator</h2>
+
+<textarea id="inputText" rows="4" cols="50">
+</textarea>
+<br>
+<label for="width">Width:</label>
+<input type="text" id="width" name="width" value="100%">
+<br>
+<label for="bgColor">Background Color:</label>
+<input type="text" id="bgColor" name="bgColor" value="#eee">
+<br>
+<label for="txtColor">Text Color:</label>
+<input type="text" id="txtColor" name="txtColor" value="#444">
+<br>
+<label for="borderRadius">Border Radius:</label>
+<input type="text" id="borderRadius" name="borderRadius" value="0">
+<br>
+<button onclick="generateAccordion()">Generate</button>
+
+<h2>Preview</h2>
+<div id="preview">
+</div>
+
+<h2>Code</h2>
+<textarea id="outputCode" rows="4" cols="50" readonly>
+</textarea>
+
+<script>
+function generateAccordion() {
+    var inputText = document.getElementById("inputText").value;
+    var width = document.getElementById("width").value;
+    var bgColor = document.getElementById("bgColor").value;
+    var txtColor = document.getElementById("txtColor").value;
+    var borderRadius = document.getElementById("borderRadius").value;
+
+    var style = document.getElementById('dynamicStyle');
+    style.innerHTML = `.accordion {
+        background-color: ${bgColor};
+        color: ${txtColor};
+        cursor: pointer;
+        padding: 18px;
+        width: ${width};
+        text-align: left;
+        border: none;
+        outline: none;
+        transition: 0.4s;
+        border-radius: ${borderRadius}px;
+    }
+
+    .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }`;
+
+    var accordionHTML = '<button class="accordion">Accordion Title</button><div class="panel"><p>' + inputText + '</p></div>';
+
+    // Show preview
+    document.getElementById("preview").innerHTML = accordionHTML;
+
+    // Show code
+    document.getElementById("outputCode").innerText = accordionHTML + "\n" + style.innerHTML;
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+        });
+    }
+}
+</script>
+
+</body>
+</html>
