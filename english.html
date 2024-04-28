@@ -110,15 +110,18 @@
         tabInputs.innerHTML = '';
 
         for (var i = 1; i <= numTabs; i++) {
-            tabInputs.innerHTML += `
-            <h3>Tab ${i}:</h3>
-            <label for="tab${i}Question">Question:</label>
-            <input type="text" id="tab${i}Question" name="tab${i}Question">
-            <br>
-            <label for="tab${i}Answer">Answer:</label>
-            <input type="text" id="tab${i}Answer" name="tab${i}Answer">
-            <br>
+            var tabInputHTML = `
+                <div>
+                    <h3>Tab ${i}:</h3>
+                    <label for="tab${i}Question">Question:</label>
+                    <input type="text" id="tab${i}Question" name="tab${i}Question">
+                    <br>
+                    <label for="tab${i}Answer">Answer:</label>
+                    <input type="text" id="tab${i}Answer" name="tab${i}Answer">
+                    <br>
+                </div>
             `;
+            tabInputs.innerHTML += tabInputHTML;
         }
     }
 
@@ -206,6 +209,7 @@
         }
     }
 </script>
+
 
 </body>
 </html>
