@@ -3,38 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accordion Widget</title>
-    <style id="dynamicStyle">
-        /* Default styles will go here. */
+    <title>Customizable Accordion Widget</title>
+    <style>
+        /* Custom styles for the accordion */
         .accordion {
-            background-color: #eee;
-            color: #444;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            text-align: left;
-            border: none;
-            outline: none;
-            transition: 0.4s;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
-
-        .panel {
-            padding: 0 18px;
-            background-color: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.2s ease-out;
+        .accordion-tab {
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+        }
+        .accordion-tab:last-child {
+            border-bottom: 1px solid #ddd;
+        }
+        .accordion-tab-header {
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .accordion-tab-content {
+            padding: 20px;
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <h2>Accordion Widget</h2>
+    <h2>Customizable Accordion Widget</h2>
     <label for="quantity">Choose the quantity of questions (up to 10):</label>
     <input type="number" id="quantity" name="quantity" min="1" max="10">
-    <button onclick="generateTabs()">Generate Tabs</button>
+    <button onclick="generateAccordion()">Generate Accordion</button>
     <div id="accordion"></div>
 
     <script>
-        function generateTabs() {
+        function generateAccordion() {
             var quantity = document.getElementById("quantity").value;
             var accordion = document.getElementById("accordion");
             accordion.innerHTML = ""; // Clear previous content
@@ -44,11 +49,24 @@
                 var answer = prompt("Enter answer for tab " + i);
 
                 var tab = document.createElement("div");
-                tab.innerHTML = "<h3>Question " + i + "</h3><div><p>" + question + "</p><p>" + answer + "</p></div>";
+                tab.classList.add("accordion-tab");
+
+                var tabHeader = document.createElement("div");
+                tabHeader.classList.add("accordion-tab-header");
+                tabHeader.textContent = "Question " + i;
+                tabHeader.onclick = function() {
+                    this.nextElementSibling.style.display = (this.nextElementSibling.style.display === "block") ? "none" : "block";
+                };
+
+                var tabContent = document.createElement("div");
+                tabContent.classList.add("accordion-tab-content");
+                tabContent.innerHTML = "<p><strong>Question:</strong> " + question + "</p><p><strong>Answer:</strong> " + answer + "</p>";
+
+                tab.appendChild(tabHeader);
+                tab.appendChild(tabContent);
                 accordion.appendChild(tab);
             }
         }
     </script>
 </body>
 </html>
-<!DOCTYPE html>
