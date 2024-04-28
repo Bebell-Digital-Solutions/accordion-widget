@@ -118,8 +118,7 @@
 
             var style = document.getElementById('dynamicStyle');
             style.innerHTML = `.accordion {
-                background-color: ${bgColor};
-                color: ${txtColor};
+                background                -color: ${txtColor};
                 cursor: pointer;
                 padding: 18px;
                 width: ${width};
@@ -160,8 +159,201 @@
         <!-- ... (previous HTML content remains unchanged) ... -->
 
         <script>
-            // ... (previous JavaScript functions remain unchanged) ...
+            function addTabInput() {
+                var numTabs = document.getElementById("numTabs").value;
+
+                var tabInputs = document.getElementById('tabInputs');
+                tabInputs.innerHTML = '';
+
+                for (var i = 1; i <= numTabs; i++) {
+                    tabInputs.innerHTML += `
+                    <h3>Tab ${i}:</h3>
+                    <label for="tab${i}Question">Question:</label>
+                    <input type="text" id="tab${i}Question" name="tab${i}Question">
+                    <br>
+                    <label for="tab${i}Answer">Answer:</label>
+                    <input type="text" id="tab${i}Answer" name="tab${i}Answer">
+                    <br>
+                    `;
+                }
+            }
+
+            function generateAccordion() {
+                var numTabs = document.getElementById("numTabs").value;
+                var accordionTitle = document.getElementById("accordionTitle").value;
+                var width = document.getElementById("width").value;
+                var bgColor = document.getElementById("bgColor").value;
+                var txtColor = document.getElementById("txtColor").value;
+                var borderRadius = document.getElementById("borderRadius").value;
+                var textAlignment = document.getElementById("textAlignment").value;
+
+                var style = document.getElementById('dynamicStyle');
+                style.innerHTML = `.accordion {
+                    background-color: ${bgColor};
+                    color: ${txtColor};
+                    cursor: pointer;
+                    padding: 18px;
+                    width: ${width};
+                    text-align: ${textAlignment}; /* User-selected text alignment */
+                    border: none;
+                    outline: none;
+                    transition: 0.4s;
+                    position: relative; /* Position for arrow */
+                }
+
+                .panel {
+                    padding: 0 18px;
+                    background-color: white;
+                    max-height: 0;
+                    overflow: hidden;
+                    transition: max-height 0.2s ease-out;
+                    text-align: ${textAlignment}; /* User-selected text alignment */
+                    position: relative; /* Position for arrow */
+                }
+
+                /* Arrow icon */
+                .accordion::after {
+                    content: '\02795'; /* Unicode character for arrow down */
+                    font-size: 13px;
+                    color: #777;
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                .active::after {
+                    content: "\02796"; /* Unicode character for arrow up */
+                }`;
+
+                var accordionHTML = '';
+                for (var i = 1; i <= numTabs; i++) {
+                    var tabQuestion = document.getElementById(`tab${i}Question`).value;
+                    var tabAnswer = document.getElementById(`tab${i}Answer`).value;
+                    accordionHTML += `<button class="accordion">${tabQuestion}</button><div class="panel"><p>${tabAnswer}</p></div>`;
+                }
+
+                // Show preview
+                document.getElementById("preview").innerHTML = accordionHTML;
+
+                // Show code
+                document.getElementById("outputCode").value = `<style>${style.innerHTML}</style>\n${accordionHTML}`;
+
+                // Add functionality to toggle accordion
+                var acc = document.getElementsByClassName("accordion");
+                var i;
+
+                for (i = 0; i < acc.length; i++) {
+                    acc[i].addEventListener("click", function() {
+                        this.classList.toggle("active");
+                        var panel = this.nextElementSibling;
+                        if (panel.style.maxHeight) {
+                            panel.style.maxHeight = null;
+                        } else {
+                            panel.style.maxHeight = panel.scrollHeight + "px";
+                        }
+                    });
+                }
+            }
         </script>
     </body>
-</html>
+    <script>
+        function addTabInput() {
+            var numTabs = document.getElementById("numTabs").value;
 
+            var tabInputs = document.getElementById('tabInputs');
+            tabInputs.innerHTML = '';
+
+            for (var i = 1; i <= numTabs; i++) {
+                tabInputs.innerHTML += `
+                <h3>Tab ${i}:</h3>
+                <label for="tab${i}Question">Question:</label>
+                <input type="text" id="tab${i}Question" name="tab${i}Question">
+                <br>
+                <label for="tab${i}Answer">Answer:</label>
+                <input type="text" id="tab${i}Answer" name="tab${i}Answer">
+                <br>
+                `;
+            }
+        }
+
+        function generateAccordion() {
+            var numTabs = document.getElementById("numTabs").value;
+            var accordionTitle = document.getElementById("accordionTitle").value;
+            var width = document.getElementById("width").value;
+            var bgColor = document.getElementById("bgColor").value;
+            var txtColor = document.getElementById("txtColor").value;
+            var borderRadius = document.getElementById("borderRadius").value;
+            var textAlignment = document.getElementById("textAlignment").value;
+
+            var style = document.getElementById('dynamicStyle');
+            style.innerHTML = `.accordion {
+                background-color: ${bgColor};
+                color: ${txtColor};
+                cursor: pointer;
+                padding: 18px;
+                width: ${width};
+                text-align: ${textAlignment}; /* User-selected text alignment */
+                border: none;
+                outline: none;
+                transition: 0.4s;
+                position: relative; /* Position for arrow */
+            }
+
+            .panel {
+                padding: 0 18px;
+                background-color: white;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.2s ease-out;
+                text-align: ${textAlignment}; /* User-selected text alignment */
+                position: relative; /* Position for arrow */
+            }
+
+            /* Arrow icon */
+            .accordion::after {
+                content: '\02795'; /* Unicode character for arrow down */
+                font-size: 13px;
+                color: #777;
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .active::after {
+                content: "\02796"; /* Unicode character for arrow up */
+            }`;
+
+            var accordionHTML = '';
+            for (var i = 1; i <= numTabs; i++) {
+                var tabQuestion = document.getElementById(`tab${i}Question`).value;
+                var tabAnswer = document.getElementById(`tab${i}Answer`).value;
+                accordionHTML += `<button class="accordion">${tabQuestion}</button><div class="panel"><p>${tabAnswer}</p></div>`;
+            }
+
+            // Show preview
+            document.getElementById("preview").innerHTML = accordionHTML;
+
+            // Show code
+            document.getElementById("outputCode").value = `<style>${style.innerHTML}</style>\n${accordionHTML}`;
+
+            // Add functionality to toggle accordion
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
