@@ -6,45 +6,44 @@
     <title>Customizable Accordion Generator</title>
     <style>
         /* Custom styles for the accordion */
-.accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left; /* Default text alignment */
-    border: none;
-    outline: none;
-    transition: 0.4s;
-    border-radius: 0;
-    margin-bottom: 10px; /* Spacing between tabs */
-    border-bottom: 2px solid transparent; /* Default tab border color */
-    position: relative; /* Position relative for arrow */
-}
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left; /* Default text alignment */
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            border-radius: 0;
+            margin-bottom: 10px; /* Spacing between tabs */
+            border-bottom: 2px solid transparent; /* Default tab border color */
+            position: relative; /* Position relative for arrow */
+        }
 
-.accordion::after {
-    content: '\25BC'; /* Unicode character for downward arrow */
-    font-size: 20px;
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    transition: transform 0.4s;
-}
+        .accordion::after {
+            content: '\25BC'; /* Unicode character for downward arrow */
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            transition: transform 0.4s;
+        }
 
-.accordion.active::after {
-    transform: translateY(-50%) rotate(180deg); /* Rotate arrow when active */
-}
+        .accordion.active::after {
+            transform: translateY(-50%) rotate(180deg); /* Rotate arrow when active */
+        }
 
-.panel {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-    text-align: left; /* Default text alignment */
-}
-
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            text-align: left; /* Default text alignment */
+        }
     </style>
 </head>
 <body>
@@ -103,113 +102,111 @@
     <style id="dynamicStyle"></style>
 
     <script>
-    function addTabInput() {
-        var numTabs = document.getElementById("numTabs").value;
+        function addTabInput() {
+            var numTabs = document.getElementById("numTabs").value;
 
-        var tabInputs = document.getElementById('tabInputs');
-        tabInputs.innerHTML = '';
+            var tabInputs = document.getElementById('tabInputs');
+            tabInputs.innerHTML = '';
 
-        for (var i = 1; i <= numTabs; i++) {
-            var tabInputHTML = `
-                <div>
-                    <h3>Tab ${i}:</h3>
-                    <label for="tab${i}Question">Question:</label>
-                    <input type="text" id="tab${i}Question" name="tab${i}Question">
-                    <br>
-                    <label for="tab${i}Answer">Answer:</label>
-                    <input type="text" id="tab${i}Answer" name="tab${i}Answer">
-                    <br>
-                </div>
-            `;
-            tabInputs.innerHTML += tabInputHTML;
-        }
-    }
-
-    function generateAccordion() {
-        var numTabs = document.getElementById("numTabs").value;
-        var accordionTitle = document.getElementById("accordionTitle").value;
-        var width = document.getElementById("width").value;
-        var bgColor = document.getElementById("bgColor").value;
-        var txtColor = document.getElementById("txtColor").value;
-        var borderRadius = document.getElementById("borderRadius").value;
-        var textAlignment = document.getElementById("textAlignment").value;
-        var containerAlignment = document.getElementById("containerAlignment").value;
-        var spacing = document.getElementById("spacing").value;
-        var tabBorderColor = document.getElementById("tabBorderColor").value;
-
-        var style = document.getElementById('dynamicStyle');
-        style.innerHTML = `.accordion {
-            background-color: ${bgColor};
-            color: ${txtColor};
-            cursor: pointer;
-            padding: 18px;
-            width: ${width};
-            text-align: ${textAlignment}; /* User-selected text alignment */
-            border: none;
-            outline: none;
-            transition: 0.4s;
-            border-radius: ${borderRadius}px;
-            margin-bottom: ${spacing}; /* Spacing between tabs */
-            border-bottom: 2px solid ${tabBorderColor}; /* Tab border color */
-            position: relative; /* Position relative for arrow */
+            for (var i = 1; i <= numTabs; i++) {
+                var tabInputHTML = `
+                    <div>
+                        <h3>Tab ${i}:</h3>
+                        <label for="tab${i}Question">Question:</label>
+                        <input type="text" id="tab${i}Question" name="tab${i}Question">
+                        <br>
+                        <label for="tab${i}Answer">Answer:</label>
+                        <input type="text" id="tab${i}Answer" name="tab${i}Answer">
+                        <br>
+                    </div>
+                `;
+                tabInputs.innerHTML += tabInputHTML;
+            }
         }
 
-        .accordion::after {
-            content: '\25BC'; /* Unicode character for downward arrow */
-            font-size: 20px;
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            transition: transform 0.4s;
+        function generateAccordion() {
+            var numTabs = document.getElementById("numTabs").value;
+            var accordionTitle = document.getElementById("accordionTitle").value;
+            var width = document.getElementById("width").value;
+            var bgColor = document.getElementById("bgColor").value;
+            var txtColor = document.getElementById("txtColor").value;
+            var borderRadius = document.getElementById("borderRadius").value;
+            var textAlignment = document.getElementById("textAlignment").value;
+            var containerAlignment = document.getElementById("containerAlignment").value;
+            var spacing = document.getElementById("spacing").value;
+            var tabBorderColor = document.getElementById("tabBorderColor").value;
+
+            var style = document.getElementById('dynamicStyle');
+            style.innerHTML = `.accordion {
+                background-color: ${bgColor};
+                color: ${txtColor};
+                cursor: pointer;
+                padding: 18px;
+                width: ${width};
+                text-align: ${textAlignment}; /* User-selected text alignment */
+                border: none;
+                outline: none;
+                transition: 0.4s;
+                border-radius: ${borderRadius}px;
+                margin-bottom: ${spacing}; /* Spacing between tabs */
+                border-bottom: 2px solid ${tabBorderColor}; /* Tab border color */
+                position: relative; /* Position relative for arrow */
+            }
+
+            .accordion::after {
+                content: '\25BC'; /* Unicode character for downward arrow */
+                font-size: 20px;
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                transition: transform 0.4s;
+            }
+
+            .accordion.active::after {
+                transform: translateY(-50%) rotate(180deg); /* Rotate arrow when active */
+            }
+
+            .panel {
+                padding: 0 18px;
+                background-color: white;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.2s ease-out;
+                text-align: ${textAlignment}; /* User-selected text alignment */
+            }`;
+
+            if(containerAlignment === 'left') {
+                style.innerHTML += `.accordion { margin-right: auto; }`;
+            } else if(containerAlignment === 'right') {
+                style.innerHTML += `.accordion { margin-left: auto; }`;
+            }
+
+            var accordionHTML = '';
+            for (var i = 1; i <= numTabs; i++) {
+                var tabQuestion = document.getElementById(`tab${i}Question`).value;
+                var tabAnswer = document.getElementById(`tab${i}Answer`).value;
+                accordionHTML += `<button class="accordion">${tabQuestion}</button><div class="panel"><p>${tabAnswer}</p></div>`;
+            }
+
+            document.getElementById("preview").innerHTML = accordionHTML;
+            document.getElementById("outputCode").value = `<style>${style.innerHTML}</style>\n${accordionHTML}`;
+
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+                });
+            }
         }
-
-        .accordion.active::after {
-            transform: translateY(-50%) rotate(180deg); /* Rotate arrow when active */
-        }
-
-        .panel {
-            padding: 0 18px;
-            background-color: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.2s ease-out;
-            text-align: ${textAlignment}; /* User-selected text alignment */
-        }`;
-
-        if(containerAlignment === 'left') {
-            style.innerHTML += `.accordion { margin-right: auto; }`;
-        } else if(containerAlignment === 'right') {
-            style.innerHTML += `.accordion { margin-left: auto; }`;
-        }
-
-        var accordionHTML = '';
-        for (var i = 1; i <= numTabs; i++) {
-            var tabQuestion = document.getElementById(`tab${i}Question`).value;
-            var tabAnswer = document.getElementById(`tab${i}Answer`).value;
-            accordionHTML += `<button class="accordion">${tabQuestion}</button><div class="panel"><p>${tabAnswer}</p></div>`;
-        }
-
-        document.getElementById("preview").innerHTML = accordionHTML;
-        document.getElementById("outputCode").value = `<style>${style.innerHTML}</style>\n${accordionHTML}`;
-
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            });
-        }
-    }
-</script>
-
-
+    </script>
 </body>
 </html>
