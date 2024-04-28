@@ -16,6 +16,9 @@
             border: none;
             outline: none;
             transition: 0.4s;
+            border-radius: 0;
+            margin-bottom: 10px; /* Espacio entre pestañas */
+            border-bottom: 2px solid transparent; /* Color de borde predeterminado */
         }
 
         .panel {
@@ -63,6 +66,12 @@
         <option value="right">Derecha</option>
     </select>
     <br>
+    <label for="spacing">Espaciado entre Pestañas:</label>
+    <input type="text" id="spacing" name="spacing" value="10px">
+    <br>
+    <label for="tabBorderColor">Color de Borde para Pestañas:</label>
+    <input type="text" id="tabBorderColor" name="tabBorderColor" value="transparent">
+    <br>
     <div id="tabInputs">
         <!-- Campos de entrada generados dinámicamente para cada pestaña -->
     </div>
@@ -106,6 +115,8 @@
             var borderRadius = document.getElementById("borderRadius").value;
             var textAlignment = document.getElementById("textAlignment").value;
             var containerAlignment = document.getElementById("containerAlignment").value;
+            var spacing = document.getElementById("spacing").value;
+            var tabBorderColor = document.getElementById("tabBorderColor").value;
 
             var style = document.getElementById('dynamicStyle');
             style.innerHTML = `.accordion {
@@ -119,8 +130,8 @@
                 outline: none;
                 transition: 0.4s;
                 border-radius: ${borderRadius}px;
-                margin: 0 auto; /* Por defecto, centrado horizontal */
-                display: block; /* Por defecto, comportamiento de bloque */
+                margin-bottom: ${spacing}; /* Espacio entre pestañas */
+                border-bottom: 2px solid ${tabBorderColor}; /* Color de borde de pestañas */
             }
 
             .panel {
@@ -166,5 +177,3 @@
     </script>
 </body>
 </html>
-
-                                 
