@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion Widget</title>
+    <style id="dynamicStyle">
+        /* Default styles will go here. */
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+    </style>
+</head>
+<body>
+    <h2>Accordion Widget</h2>
+    <label for="quantity">Choose the quantity of questions (up to 10):</label>
+    <input type="number" id="quantity" name="quantity" min="1" max="10">
+    <button onclick="generateTabs()">Generate Tabs</button>
+    <div id="accordion"></div>
+
+    <script>
+        function generateTabs() {
+            var quantity = document.getElementById("quantity").value;
+            var accordion = document.getElementById("accordion");
+            accordion.innerHTML = ""; // Clear previous content
+
+            for (var i = 1; i <= quantity; i++) {
+                var question = prompt("Enter question for tab " + i);
+                var answer = prompt("Enter answer for tab " + i);
+
+                var tab = document.createElement("div");
+                tab.innerHTML = "<h3>Question " + i + "</h3><div><p>" + question + "</p><p>" + answer + "</p></div>";
+                accordion.appendChild(tab);
+            }
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
