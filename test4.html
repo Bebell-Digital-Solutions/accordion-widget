@@ -106,7 +106,7 @@
             document.getElementById("preview").innerHTML = accordionHTML;
 
             // Show code
-            document.getElementById("outputCode").innerText = accordionHTML + "\n" + style.innerHTML;
+            document.getElementById("outputCode").value = `<style>${style.innerHTML}</style>\n${accordionHTML}`;
 
             var acc = document.getElementsByClassName("accordion");
             var i;
@@ -116,3 +116,4 @@
                     this.classList.toggle("active");
                     var panel = this.nextElementSibling;
                     if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null
