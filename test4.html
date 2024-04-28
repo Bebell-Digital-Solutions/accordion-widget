@@ -12,7 +12,7 @@
             cursor: pointer;
             padding: 18px;
             width: 100%;
-            text-align: left;
+            text-align: left; /* Default text alignment */
             border: none;
             outline: none;
             transition: 0.4s;
@@ -24,6 +24,7 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.2s ease-out;
+            text-align: left; /* Default text alignment */
         }
     </style>
 </head>
@@ -48,6 +49,13 @@
     <label for="borderRadius">Border Radius:</label>
     <input type="text" id="borderRadius" name="borderRadius" value="0">
     <br>
+    <label for="textAlignment">Text Alignment:</label>
+    <select id="textAlignment" name="textAlignment">
+        <option value="left">Left</option>
+        <option value="center">Center</option>
+        <option value="right">Right</option>
+    </select>
+    <br>
     <button onclick="generateAccordion()">Generate</button>
 
     <h2>Preview</h2>
@@ -64,6 +72,7 @@
             var bgColor = document.getElementById("bgColor").value;
             var txtColor = document.getElementById("txtColor").value;
             var borderRadius = document.getElementById("borderRadius").value;
+            var textAlignment = document.getElementById("textAlignment").value;
 
             var style = document.getElementById('dynamicStyle');
             style.innerHTML = `.accordion {
@@ -72,7 +81,7 @@
                 cursor: pointer;
                 padding: 18px;
                 width: ${width};
-                text-align: left;
+                text-align: ${textAlignment}; /* User-selected text alignment */
                 border: none;
                 outline: none;
                 transition: 0.4s;
@@ -85,6 +94,7 @@
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.2s ease-out;
+                text-align: ${textAlignment}; /* User-selected text alignment */
             }`;
 
             var accordionHTML = '';
@@ -106,13 +116,3 @@
                     this.classList.toggle("active");
                     var panel = this.nextElementSibling;
                     if (panel.style.maxHeight) {
-                        panel.style.maxHeight = null;
-                    } else {
-                        panel.style.maxHeight = panel.scrollHeight + "px";
-                    } 
-                });
-            }
-        }
-    </script>
-</body>
-</html>
