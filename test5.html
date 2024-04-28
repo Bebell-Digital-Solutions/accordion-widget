@@ -56,6 +56,10 @@
         <option value="right">Right</option>
     </select>
     <br>
+    <div id="tabInputs">
+        <!-- Dynamically generated input fields for each tab -->
+    </div>
+    <button onclick="addTabInput()">Add Tab Input</button>
     <button onclick="generateAccordion()">Generate</button>
 
     <h2>Preview</h2>
@@ -67,6 +71,25 @@
     <style id="dynamicStyle"></style>
 
     <script>
+        function addTabInput() {
+            var numTabs = document.getElementById("numTabs").value;
+
+            var tabInputs = document.getElementById('tabInputs');
+            tabInputs.innerHTML = '';
+
+            for (var i = 1; i <= numTabs; i++) {
+                tabInputs.innerHTML += `
+                <h3>Tab ${i}:</h3>
+                <label for="tab${i}Question">Question:</label>
+                <input type="text" id="tab${i}Question" name="tab${i}Question">
+                <br>
+                <label for="tab${i}Answer">Answer:</label>
+                <input type="text" id="tab${i}Answer" name="tab${i}Answer">
+                <br>
+                `;
+            }
+        }
+
         function generateAccordion() {
             var numTabs = document.getElementById("numTabs").value;
             var accordionTitle = document.getElementById("accordionTitle").value;
@@ -92,24 +115,4 @@
 
             .panel {
                 padding: 0 18px;
-                background-color: white;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.2s ease-out;
-                text-align: ${textAlignment}; /* User-selected text alignment */
-            }`;
-
-            var accordionHTML = '';
-            for (var i = 1; i <= numTabs; i++) {
-                accordionHTML += `<button class="accordion">${accordionTitle} ${i}</button><div class="panel"><p>Content for Tab ${i}</p></div>`;
-            }
-
-            // Show preview
-            document.getElementById("preview").innerHTML = accordionHTML;
-
-            // Show code
-            document.getElementById("outputCode").value = `<style>${style.innerHTML}</style>\n${accordionHTML}`;
-        }
-    </script>
-</body>
-</html>
+                background-color:
