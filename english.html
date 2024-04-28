@@ -19,6 +19,21 @@
             border-radius: 0;
             margin-bottom: 10px; /* Spacing between tabs */
             border-bottom: 2px solid transparent; /* Default tab border color */
+            position: relative; /* Position relative for arrow */
+        }
+
+        .accordion::after {
+            content: '\25BC'; /* Unicode character for downward arrow */
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            transition: transform 0.4s;
+        }
+
+        .accordion.active::after {
+            transform: translateY(-50%) rotate(180deg); /* Rotate arrow when active */
         }
 
         .panel {
@@ -132,6 +147,21 @@
                 border-radius: ${borderRadius}px;
                 margin-bottom: ${spacing}; /* Spacing between tabs */
                 border-bottom: 2px solid ${tabBorderColor}; /* Tab border color */
+                position: relative; /* Position relative for arrow */
+            }
+
+            .accordion::after {
+                content: '\25BC'; /* Unicode character for downward arrow */
+                font-size: 20px;
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                transition: transform 0.4s;
+            }
+
+            .accordion.active::after {
+                transform: translateY(-50%) rotate(180deg); /* Rotate arrow when active */
             }
 
             .panel {
