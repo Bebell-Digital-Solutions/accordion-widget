@@ -64,6 +64,8 @@
     <h2>Code</h2>
     <textarea id="outputCode" rows="4" cols="50" readonly></textarea>
 
+    <style id="dynamicStyle"></style>
+
     <script>
         function generateAccordion() {
             var numTabs = document.getElementById("numTabs").value;
@@ -107,13 +109,7 @@
 
             // Show code
             document.getElementById("outputCode").value = `<style>${style.innerHTML}</style>\n${accordionHTML}`;
-
-            var acc = document.getElementsByClassName("accordion");
-            var i;
-
-            for (i = 0; i < acc.length; i++) {
-                acc[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    var panel = this.nextElementSibling;
-                    if (panel.style.maxHeight) {
-                        panel.style.maxHeight = null
+        }
+    </script>
+</body>
+</html>
