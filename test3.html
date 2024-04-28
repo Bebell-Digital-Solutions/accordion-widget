@@ -30,7 +30,11 @@
 <body>
     <h2>Accordion Generator</h2>
 
-    <textarea id="inputText" rows="4" cols="50"></textarea>
+    <label for="numTabs">Number of Tabs:</label>
+    <input type="number" id="numTabs" name="numTabs" min="1" max="10">
+    <br>
+    <label for="accordionTitle">Accordion Title:</label>
+    <input type="text" id="accordionTitle" name="accordionTitle">
     <br>
     <label for="width">Width:</label>
     <input type="text" id="width" name="width" value="100%">
@@ -54,7 +58,8 @@
 
     <script>
         function generateAccordion() {
-            var inputText = document.getElementById("inputText").value;
+            var numTabs = document.getElementById("numTabs").value;
+            var accordionTitle = document.getElementById("accordionTitle").value;
             var width = document.getElementById("width").value;
             var bgColor = document.getElementById("bgColor").value;
             var txtColor = document.getElementById("txtColor").value;
@@ -82,7 +87,10 @@
                 transition: max-height 0.2s ease-out;
             }`;
 
-            var accordionHTML = '<button class="accordion">Accordion Title</button><div class="panel"><p>' + inputText + '</p></div>';
+            var accordionHTML = '';
+            for (var i = 1; i <= numTabs; i++) {
+                accordionHTML += `<button class="accordion">${accordionTitle} ${i}</button><div class="panel"><p>Content for Tab ${i}</p></div>`;
+            }
 
             // Show preview
             document.getElementById("preview").innerHTML = accordionHTML;
