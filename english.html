@@ -22,16 +22,12 @@
             position: relative; /* Position relative for arrow */
         }
 
-        .accordion::after {
-            content: '\25BC'; /* Unicode character for downward arrow */
-            font-size: 20px;
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            transition: transform 0.4s;
-        }
-
+        .faq-container .dropdown-arrow {
+        color: #a69724;
+        float: right;
+        margin-top: 2px;
+        margin-right: 5px;
+    }
        
         .panel {
             padding: 0 18px;
@@ -41,12 +37,7 @@
             transition: max-height 0.2s ease-out;
             text-align: left; /* Default text alignment */
         }
-.faq-container .dropdown-arrow {
-        color: #a69724;
-        float: right;
-        margin-top: 2px;
-        margin-right: 5px;
-    }
+
  }
     </style>
 </head>
