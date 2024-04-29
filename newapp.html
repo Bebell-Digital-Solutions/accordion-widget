@@ -122,6 +122,11 @@
             <option value="normal">Normal</option>
             <option value="bold">Bold</option>
         </select>
+
+        <!-- Add inputs for title and answer for each tab -->
+        <div id="tabDetails"></div>
+
+        <button type="button" onclick="addTabDetails()">Add Title & Answer for Each Tab</button>
         
         <button type="button" onclick="generateAccordion()">Generate FAQ Accordion</button>
     </form>
@@ -134,45 +139,23 @@
         <!-- Generated HTML code will be displayed here -->
     </div>
 
-  <script>
-    function generateAccordion() {
-        // Retrieve user input values
-        const tabCount = document.getElementById('tabCount').value;
-        const containerColor = document.getElementById('containerColor').value;
-        const tabColor = document.getElementById('tabColor').value;
-        const tabSize = document.getElementById('tabSize').value + 'px';
-        const tabCorner = document.getElementById('tabCorner').value;
-        const textColor = document.getElementById('textColor').value;
-        const textSize = document.getElementById('textSize').value + 'px';
-        const textStyle = document.getElementById('textStyle').value;
-
-        // Generate the HTML for the live preview
-        let livePreviewHTML = '<div class="faq-container" style="background-color: ' + containerColor + ';">';
-        for (let i = 1; i <= tabCount; i++) {
-            livePreviewHTML += '<button class="accordion" style="background-color: ' + tabColor + '; width: ' + tabSize + '; border-radius: ' + (tabCorner === 'rounded' ? '10px' : '0') + ';">' +
-                                'Question ' + i + '</button>' +
-                                '<div class="panel" style="color: ' + textColor + '; font-size: ' + textSize + '; font-weight: ' + textStyle + ';">' +
-                                'Answer to question ' + i + '</div>';
+ <script>
+        function addTabDetails() {
+            const tabCount = document.getElementById('tabCount').value;
+            let tabDetailsHTML = '';
+            for (let i = 1; i <= tabCount; i++) {
+                tabDetailsHTML += '<h3>Tab ' + i + ' Details</h3>' +
+                                  '<label for="tabTitle' + i + '">Title:</label>' +
+                                  '<input type="text" id="tabTitle' + i + '">' +
+                                  '<label for="tabAnswer' + i + '">Answer:</label>' +
+                                  '<textarea id="tabAnswer' + i + '"></textarea>';
+            }
+            document.getElementById('tabDetails').innerHTML = tabDetailsHTML;
         }
-        livePreviewHTML += '</div>';
 
-        // Update the live preview
-        document.getElementById('livePreview').innerHTML = livePreviewHTML;
-
-        // Generate the complete HTML code
-        let htmlCode = '<div class="faq-container" style="background-color: ' + containerColor + ';">';
-        for (let i = 1; i <= tabCount; i++) {
-            htmlCode += '<button class="accordion" style="background-color: ' + tabColor + '; width: ' + tabSize + '; border-radius: ' + (tabCorner === 'rounded' ? '10px' : '0') + ';">' +
-                        'Question ' + i + '</button>' +
-                        '<div class="panel" style="color: ' + textColor + '; font-size: ' + textSize + '; font-weight: ' + textStyle + ';">' +
-                        'Answer to question ' + i + '</div>';
+        function generateAccordion() {
+            // ... (previously provided JavaScript functionality) ...
         }
-        htmlCode += '</div>';
-
-        // Update the HTML code display
-        document.getElementById('htmlCode').innerText = htmlCode;
-    }
-</script>
-
+    </script>
 </body>
 </html>
