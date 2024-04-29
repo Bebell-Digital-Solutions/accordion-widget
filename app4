@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Accordion Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        h2, h3 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input, select, button {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #007bff;
+            color: #fff;
+            border: 0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #livePreview, #htmlCode {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-container {
+            margin-top: 20px;
+        }
+
+        .accordion {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: #f4f4f4;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .panel.active {
+            max-height: 500px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body>
+    <form id="faqForm">
+        <h2>Add FAQ Tabs</h2>
+        <label for="tabCount">Number of Tabs (1-10):</label>
+        <input type="number" id="tabCount" min="1" max="10" value="1">
+        
+        <h3>Customization Options</h3>
+        <label for="containerColor">Container Color:</label>
+        <input type="color" id="containerColor" value="#ffffff">
+        
+        <label for="tabColor">Tab Color:</label>
+        <input type="color" id="tabColor" value="#007bff">
+        
+        <label for="tabSize">Tab Size (px):</label>
+        <input type="number" id="tabSize" min="20" max="100" value="40">
+        
+        <label for="tabCorner">Tab Corner Shape:</label>
+        <select id="tabCorner">
+            <option value="rounded">Rounded</option>
+            <option value="square">Square</option>
+        </select>
+        
+        <label for="textColor">Text Color:</label>
+        <input type="color" id="textColor" value="#333333">
+        
+        <label for="textSize">Text Size (px):</label>
+        <input type="number" id="textSize" min="12" max="24" value="16">
+        
+        <label for="textStyle">Text Style:</label>
+        <select id="textStyle">
+            <option value="normal">Normal</option>
+            <option value="bold">Bold</option>
+        </select>
+
+        <div id="tabDetails"></div>
+
+        <button type="button" onclick="addTabDetails()">Add Title & Answer for Each Tab</button>
+        <button type="button" onclick="generateAccordion()">Generate FAQ Accordion</button>
+    </form>
+
+    <div id="livePreview">
+        <!-- Live preview of the FAQ accordion will be displayed here -->
+    </div>
+
+    <div id="htmlCode">
+        <!-- Generated HTML code will be displayed here -->
+    </div>
+
+<script>
+    function addTabDetails() {
+        const tabCount = document.getElementById('tabCount').value;
+        let tabDetailsHTML = '';
+        for (let i = 1; i <= tabCount; i++) {
+            tabDetailsHTML += '<h3>Tab ' + i + ' Details</h3>' +
+                              '<label for="tabTitle' + i + '">Title:</label>' +
+                              '<input type="text" id="tabTitle' + i + '">' +
+                              '<label for="tabAnswer' + i + '">Answer:</label>' +
+                              '<textarea id="tabAnswer' + i + '"></textarea>';
+        }
+        document.getElementById('tabDetails').innerHTML = tabDetailsHTML;
+    }
+
+    function generateAccordion() {
+        const tabCount = document.getElementById('tabCount').value;
+        let accordionHTML = '<div class="faq-container" style="background-color: #f4f4f4;">';
+        for (let i = 1; i <= tabCount; i++) {
+            const tabTitle = document.getElementById('tabTitle' + i).value;
+            const tabAnswer = document.getElementById('tabAnswer' + i).value;
+
+            accordionHTML += '<button class="accordion">' + tabTitle + '</button>' +
+                             '<div class="panel">' + tabAnswer + '</div>';
+        }
+        accordionHTML += '</div>';
+
+        document.getElementById('livePreview').innerHTML = accordionHTML;
+        document.getElementById('htmlCode').innerText = accordionHTML;
+
+        // Add event listeners to handle tab opening and closing
+        const accordions = document.querySelectorAll('.accordion');
+        accordions.forEach(accordion => {
+            accordion.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + 'px';
+                }
+            });
+        });
+    }
+</script>
+
+</body>
+</html>
