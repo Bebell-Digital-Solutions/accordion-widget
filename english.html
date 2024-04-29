@@ -19,7 +19,6 @@
             border-radius: 0;
             margin-bottom: 10px; /* Spacing between tabs */
             border-bottom: 2px solid transparent; /* Default tab border color */
-            position: relative; /* Position relative for arrow */
         }
 
         .panel {
@@ -95,18 +94,15 @@
             tabInputs.innerHTML = '';
 
             for (var i = 1; i <= numTabs; i++) {
-                var tabInputHTML = `
-                    <div>
-                        <h3>Tab ${i}:</h3>
-                        <label for="tab${i}Question">Question:</label>
-                        <input type="text" id="tab${i}Question" name="tab${i}Question">
-                        <br>
-                        <label for="tab${i}Answer">Answer:</label>
-                        <input type="text" id="tab${i}Answer" name="tab${i}Answer">
-                        <br>
-                    </div>
+                tabInputs.innerHTML += `
+                <h3>Tab ${i}:</h3>
+                <label for="tab${i}Question">Question:</label>
+                <input type="text" id="tab${i}Question" name="tab${i}Question">
+                <br>
+                <label for="tab${i}Answer">Answer:</label>
+                <input type="text" id="tab${i}Answer" name="tab${i}Answer">
+                <br>
                 `;
-                tabInputs.innerHTML += tabInputHTML;
             }
         }
 
@@ -136,21 +132,6 @@
                 border-radius: ${borderRadius}px;
                 margin-bottom: ${spacing}; /* Spacing between tabs */
                 border-bottom: 2px solid ${tabBorderColor}; /* Tab border color */
-                position: relative; /* Position relative for arrow */
-            }
-
-            .accordion::after {
-                content: '\25BC'; /* Unicode character for downward arrow */
-                font-size: 20px;
-                position: absolute;
-                top: 50%;
-                right: 10px;
-                transform: translateY(-50%);
-                transition: transform 0.4s;
-            }
-
-            .accordion.active::after {
-                transform: translateY(-50%) rotate(180deg); /* Rotate arrow when active */
             }
 
             .panel {
