@@ -139,23 +139,36 @@
         <!-- Generated HTML code will be displayed here -->
     </div>
 
- <script>
-        function addTabDetails() {
-            const tabCount = document.getElementById('tabCount').value;
-            let tabDetailsHTML = '';
-            for (let i = 1; i <= tabCount; i++) {
-                tabDetailsHTML += '<h3>Tab ' + i + ' Details</h3>' +
-                                  '<label for="tabTitle' + i + '">Title:</label>' +
-                                  '<input type="text" id="tabTitle' + i + '">' +
-                                  '<label for="tabAnswer' + i + '">Answer:</label>' +
-                                  '<textarea id="tabAnswer' + i + '"></textarea>';
-            }
-            document.getElementById('tabDetails').innerHTML = tabDetailsHTML;
+<script>
+    function addTabDetails() {
+        const tabCount = document.getElementById('tabCount').value;
+        let tabDetailsHTML = '';
+        for (let i = 1; i <= tabCount; i++) {
+            tabDetailsHTML += '<h3>Tab ' + i + ' Details</h3>' +
+                              '<label for="tabTitle' + i + '">Title:</label>' +
+                              '<input type="text" id="tabTitle' + i + '">' +
+                              '<label for="tabAnswer' + i + '">Answer:</label>' +
+                              '<textarea id="tabAnswer' + i + '"></textarea>';
         }
+        document.getElementById('tabDetails').innerHTML = tabDetailsHTML;
+    }
 
-        function generateAccordion() {
-            // ... (previously provided JavaScript functionality) ...
+    function generateAccordion() {
+        const tabCount = document.getElementById('tabCount').value;
+        let accordionHTML = '<div class="faq-container" style="background-color: #f4f4f4;">';
+        for (let i = 1; i <= tabCount; i++) {
+            const tabTitle = document.getElementById('tabTitle' + i).value;
+            const tabAnswer = document.getElementById('tabAnswer' + i).value;
+
+            accordionHTML += '<button class="accordion">' + tabTitle + '</button>' +
+                             '<div class="panel">' + tabAnswer + '</div>';
         }
-    </script>
+        accordionHTML += '</div>';
+
+        document.getElementById('livePreview').innerHTML = accordionHTML;
+        document.getElementById('htmlCode').innerText = accordionHTML;
+    }
+</script>
+
 </body>
 </html>
